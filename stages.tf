@@ -11,7 +11,10 @@ resource "aws_apigatewayv2_stage" "api_stage" {
       routeKey: "$context.routeKey",
       status: "$context.status",
       protocol: "$context.protocol",
-      responseLength: "$context.responseLength"
+      responseLength: "$context.responseLength",
+      context: "$context",
+      authorizerError: "$context.authorizer.error",
+      auth: "$request.header.Authorization"
     })
   }
 
