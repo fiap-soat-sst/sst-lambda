@@ -9,4 +9,7 @@ resource "aws_apigatewayv2_integration" "backend_integration" {
   integration_type   = "HTTP_PROXY"
   integration_uri    = data.aws_eks_cluster.sst_eks.endpoint
   integration_method = "ANY"
+  request_parameters = {
+    "append:header.stringKey" = "$context.authorizer.stringKey"
+  }
 }
