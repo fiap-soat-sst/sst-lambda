@@ -6,7 +6,7 @@ const dynamodb = new aws.DynamoDB.DocumentClient();
 
 
 export const handler = async (event) => {
-  const { headers, methodArn } = event;
+  const { headers, routeArn } = event;
   const { ["x-user-cpf"]: cpf, ["x-user-name"]: name, ["x-api-key"]: apiKey } = headers;
 
   let userExists = null;
@@ -20,7 +20,7 @@ export const handler = async (event) => {
     userExists ? await updateUserName(cpf, name) : await createUser(cpf, name, 'user');    
     token = generateToken({ cpf, name, type: 'user' });
   } else if (cpf && userExists) {
-    token = generateToken({ cpf, name: userExists.nome, type: 'user' });
+    token = generateToken({ cpf, name: userExists.name, type: 'user' });
   } else if (name) {
     token = generateToken({ name, type: 'unregistered user' });
   } else if (apiKey) {
@@ -31,15 +31,15 @@ export const handler = async (event) => {
   }
 
   if (token) {
-    return generateAllowPolicyWithToken(methodArn, token);
+    return generateAllowPolicyWithToken(routeArn, token);
   }
 
-  return generateDenyPolicy(methodArn);
+  return generateDenyPolicy(routeArn);
 };
 
 
 function generateToken(payload) {
-  const secret = process.env.JWT_SECRET || 'your-secret-key';
+  const secret = process.env.JWT_SECRET || '3k{${?^d45o1bja6you8d&k5m;+n)t$<${_!]1d/:=(:6j=d*|4::)]:!5{`]z_';
   return jwt.sign(payload, secret, { expiresIn: '1h' });
 }
 
