@@ -1,4 +1,4 @@
-name: Example Service Release
+name: Terraform Deploy
 
 on:
   workflow_dispatch:
@@ -29,9 +29,11 @@ jobs:
           terraform init -input=false
       - name: Validate terraform plan
         run: |
+          cd terraform
           terraform validate
       - name: plan
         run: |
+          cd terraform
           terraform plan -input=false -compact-warnings -out=plan.file -no-color
 
   deploy:
@@ -50,5 +52,6 @@ jobs:
           aws-region: ${{ env.AWS_DEFAULT_REGION }}
       - name: Initialise project and deploy terraform
         run: |
+          cd terraform
           terraform init
           terraform apply -auto-approve=true -compact-warnings -input=false -no-color
