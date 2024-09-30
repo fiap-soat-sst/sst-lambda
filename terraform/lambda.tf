@@ -1,4 +1,4 @@
-data "aws_iam_role" "existing_lambda_role" {
+data "aws_iam_role" "existing_lab_role" {
   name = "LabRole"
 }
 
@@ -49,7 +49,7 @@ resource "aws_lambda_function" "authorizer" {
   source_code_hash = data.archive_file.authorizer.output_base64sha256
   timeout       = 10
 
-  role          = data.aws_iam_role.existing_lambda_role.arn
+  role          = data.aws_iam_role.existing_lab_role.arn
   layers        = [aws_lambda_layer_version.this.arn]
 
   environment {
