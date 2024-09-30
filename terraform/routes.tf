@@ -1,4 +1,3 @@
-# Definindo o recurso de API Gateway
 resource "aws_apigatewayv2_route" "proxy_route" {
   api_id    = aws_apigatewayv2_api.api_gateway.id
   route_key = "ANY /{proxy+}"

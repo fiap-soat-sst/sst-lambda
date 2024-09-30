@@ -28,7 +28,7 @@ resource "aws_lambda_layer_version" "this" {
 
   compatible_runtimes = ["${local.runtime}"]
 
-  # depends_on = [null_resource.build_lambda_layers]
+  depends_on = [null_resource.build_lambda_layers]
 }
 
 data "archive_file" "authorizer" {
