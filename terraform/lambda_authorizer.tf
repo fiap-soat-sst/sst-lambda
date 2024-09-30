@@ -5,6 +5,8 @@ resource "aws_apigatewayv2_authorizer" "lambda_authorizer" {
   authorizer_type              = "REQUEST"
   authorizer_uri               = "arn:aws:apigateway:${var.aws_region}:lambda:path/2015-03-31/functions/${aws_lambda_function.authorizer.arn}/invocations"
   authorizer_payload_format_version = "2.0"
+  authorizer_result_ttl_in_seconds = 3600
+  identity_sources = ["$request.header.token"]
 }
 
 resource "aws_lambda_permission" "allow_api_gateway" {
