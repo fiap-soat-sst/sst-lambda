@@ -1,4 +1,7 @@
 # SST Lambda and terraform
+[![Terraform Apply](https://github.com/fiap-soat-sst/sst-lambda/actions/workflows/terraform-plan.yml/badge.svg)](https://github.com/fiap-soat-sst/sst-lambda/actions/workflows/terraform-plan.yml)
+[![Terraform Deploy](https://github.com/fiap-soat-sst/sst-lambda/actions/workflows/terraform.yml/badge.svg)](https://github.com/fiap-soat-sst/sst-lambda/actions/workflows/terraform.yml)
+
 
 this repository contains lambda, api gateway and DynamoDb terraform of the Self Service Totem API.
 
